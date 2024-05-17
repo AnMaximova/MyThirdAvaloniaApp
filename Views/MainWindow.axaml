@@ -1,0 +1,96 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MyThirdAvaloniaApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+		Width="1200"
+		Height="700"
+        x:Class="MyThirdAvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MyThirdAvaloniaApp - Alpaca By Animals Network Team"
+	    CanResize="False"	>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5"></Setter>
+			<Setter Property="Foreground" Value="#FBEEC1"></Setter>
+			<Setter Property="FontWeight" Value="Medium"></Setter>
+		</Style>
+		<Style Selector="DockPanel TextBlock">
+			<Setter Property="Margin" Value="10"></Setter>
+		</Style>
+		<Style Selector="Image">
+			<Setter Property="Margin" Value="25"></Setter>
+		</Style>
+	</Window.Styles>
+
+	<Grid ShowGridLines="False"
+		  RowDefinitions="auto,*"
+		  ColumnDefinitions="900,*"
+		  Background="#0F0F2D">
+
+		<DockPanel Grid.Row="0"
+				   Grid.ColumnSpan="2"
+				   Background = "#8D8741">
+			<TextBlock>Home</TextBlock>
+			<TextBlock>About</TextBlock>
+			<TextBlock>Blog's Main Topic 1</TextBlock>
+			<TextBlock>Blog's Main Topic 2</TextBlock>
+			<TextBlock>Blog's Main Topic 3</TextBlock>
+			<TextBlock>Associated blogs</TextBlock>
+			<TextBlock DockPanel.Dock="Right" TextAlignment="Right">RSS</TextBlock>
+		</DockPanel>
+
+		<ListBox Grid.Row="1" Background ="#FBEEC1" ItemsSource="{Binding MyNote}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+			<StackPanel Grid.Row="1"
+					Orientation="Vertical"
+					Background="#FBEEC1">
+			<TextBlock TextWrapping="Wrap" Foreground ="#BC986A" Text ="{Binding Title}"/>		
+			<TextBlock TextWrapping="Wrap" Foreground ="#659DBD" Text ="{Binding Article}"/>
+						
+			<Image Source="/Assets/alpaca.jpg"
+					 Height="160"
+					 Width="170"
+					 Stretch="Uniform"
+					 HorizontalAlignment="Center">
+			</Image>
+			
+					<DockPanel
+						Background="#8D8741">
+						<TextBlock DockPanel.Dock="Left" Text = "{Binding Tags}"/>
+						<TextBlock DockPanel.Dock="Right" TextAlignment="Right">Rate this aticle   "4/5"</TextBlock>
+					</DockPanel>
+			</StackPanel>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+		
+		<ListBox Grid.Row="1" Grid.Column="1" Background ="#659DBD" ItemsSource="{Binding MyNews}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+				<StackPanel Grid.Row="1"
+					Grid.Column="1"
+					Background ="#BC986A">
+				<TextBlock TextWrapping="Wrap" Text="{Binding Text}"/>
+				<TextBlock TextAlignment="Right"  TextDecorations="Underline" Foreground = "#659DBD"
+					   Margin="0,0,15,10">More</TextBlock>
+				<TextBlock TextAlignment="Right" Margin="0,0,15,10" Text="{Binding Date}"/>
+				</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+	    </ListBox>	
+	</Grid>
+</Window>
+
+
